@@ -1,0 +1,83 @@
+
+
+
+<div  class="center">
+  <button (click)="exportConsulta()"><img src="{{liga}}/excel.png"
+  style="width:32px;height:32px;" ></button>
+</div>
+
+<div class="consainer1 s12">
+    <h3>Consultas del Paciente:{{NombrePacienteConsulta}}</h3>
+      <table class="striped" id="TablaConsulta">
+          <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Tratamiento</th>
+            </tr>
+          </thead>
+         
+          <tbody>
+            <tr  *ngFor="let consulta of listaConsulta  | paginate:{
+              itemsPerPage :pageSize,
+              currentPage : p
+            } ; let i = index"  >
+              <td>{{consulta.id_consulta}}</td>
+             <td>{{consulta.fecha}}</td>
+             <td>{{consulta.hora}}</td>
+             <td>{{consulta.consulta}}</td>
+             <td>
+              <button  (click)="mostrarFormularioConsulta(consulta.id_consulta)"  class="btn col l12 s8 m12 btnLogin deep-purple lighten-2  ">
+                <i class="material-icons">edit</i>
+                 </button>
+             </td>
+             <td>
+              <button (click)="eliminarconsulta(consulta.id_consulta)"  class="btn col l12 s8 m12 btnLogin red darken-2  ">
+                <i class="material-icons">delete</i>
+              </button>
+             </td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="paginaConsultas" class="row center-align ">
+          <pagination-controls class="my-paginationConsultas" (pageChange)="p = ($event)"
+          previousLabel="Anterior" nextLabel="Siguiente">
+          </pagination-controls>
+          </div>
+  
+    </div>
+
+ 
+
+    <div id="modalmodificarConsulta" class="modal">
+      <div class="modal-content">
+        <h3>Consulta:</h3>
+      </div>
+      <div class="section container">
+        <div class="row">
+          <form class="col s12" method="post">
+            <div class="row card-panel  grey lighten-2">
+              <div class="input-field col s6">
+                <input  [(ngModel)]="consulta1.fecha" name="fecha"  id="fecha1" type="text" >
+                <label  class="active" for="fecha1">Fecha:</label>
+              </div>
+              <div class="input-field col s6">
+                  <input [(ngModel)]="consulta1.hora" name="hora"  id="hora" type="text" >
+                  <label class="active" for="hora">Hora:</label>
+                </div>
+                <div class="input-field col s10">
+                  <input  [(ngModel)]="consulta1.consulta" name="consulta" id="consulta" type="text" >
+                  <label class="active" for="consulta">Tratamiento a realizar:</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button  (click)="modificarConsulta()"  type="submit" class="modal-close waves-effect waves-purple btn-flat">
+                Guardar Nueva Informacion de la Consulta  <i class="tiny material-icons right">send</i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+

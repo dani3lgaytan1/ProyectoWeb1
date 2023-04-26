@@ -1,0 +1,95 @@
+
+
+<div  class="center">
+  <button (click)="exportratamiento()"><img src="{{liga}}/excel.png"
+  style="width:32px;height:32px;" ></button>
+</div>
+
+<div class="consainer1 s12">
+  <h3>Tratamiento del Paciente:{{NombrePaciente}}</h3>
+  <table class="striped" id="TablaTratamiento">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Tratamiento</th>
+        <th>Costo total</th>
+        <th>Pago</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tratamiento of listatratamiento | paginate:{
+        itemsPerPage :pageSize,
+        currentPage : p
+      } ; let i = index">
+        <td>{{tratamiento.id_tratamiento}}</td>
+        <td>{{tratamiento.fecha}}</td>
+        <td>{{tratamiento.tratamiento}}</td>
+        <td>{{tratamiento.costo}}</td>
+        <td>{{tratamiento.pago}}</td>
+        <td>
+          <button (click)="mostrarFormularioTratamiento(tratamiento.id_tratamiento)"  class="btn   deep-purple lighten-2 ">
+            <i class="material-icons">edit</i>
+          </button>
+        </td>
+        <td>
+          <button (click)="eliminartratamiento(tratamiento.id_tratamiento)" class="btn col l12 s8 m12 btnLogin  red darken-2 ">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tr >
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Saldo total  </td>
+      <td *ngFor="let pacientesaldo of Saldo">{{pacientesaldo.Saldo}}</td>
+    </tr>
+  </table>
+  <div id="paginaTratamientos" class="row center-align ">
+    <pagination-controls class="my-paginationTratamientos" (pageChange)="p = ($event)"
+    previousLabel="Anterior" nextLabel="Siguiente">
+    </pagination-controls>
+    </div>
+</div>
+
+
+
+
+
+
+<div id="modalmodificarTratamiento" class="modal">
+  <div class="modal-content ">
+    <h3>Tratamiento:</h3>
+  </div>
+  <div class="section container">
+    <div class="row">
+      <form class="col s12" method="post">
+        <div class="row card-panel grey lighten-2">
+          <div class="input-field col s6">
+            <input [(ngModel)]="tratamientoActual.fecha" name="fecha"  id="MTfecha1" type="text">
+            <label class="active"  for="MTfecha1">FechtratamientoActuala:</label>
+          </div>
+          <div class="input-field col s6">
+            <input [(ngModel)]="tratamientoActual.tratamiento" name="tratamiento" id="MTtratamiento" type="text">
+            <label class="active" for="MTtratamiento">tratamiento:</label>
+          </div>
+          <div class="input-field col s10">
+            <input [(ngModel)]="tratamientoActual.costo" name="costo" id="MTcosto" type="number">
+            <label class="active" for="MTcosto">costo:</label>
+          </div>
+          <div class="input-field col s7">
+            <input [(ngModel)]="tratamientoActual.pago" name="pago" id="MTpago" type="number">
+            <label class="active" for="MTpago">pago:</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)=" modificart()" type="submit" class="modal-close waves-effect waves-purple btn-flat">
+            Guardar Nueva informacion del Tratamiento <i class="tiny material-icons right">send</i> 
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

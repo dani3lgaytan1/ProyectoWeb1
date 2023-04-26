@@ -1,0 +1,28 @@
+
+
+  <div class="consainer1 s12">
+  <h3>Consultas del dia:</h3>
+    <table class="striped">
+        <thead>
+      
+            <tr>
+              <th>Nombre del paciente</th>
+              <th>Hora</th>
+              <th>Tratamiento</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr  *ngFor="let consulta of consultadia"  >
+           <td >{{consulta.nombre}}</td>
+            <td >{{consulta.hora}}</td>
+           <td >{{consulta.consulta}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+
+  </div>
+  
+
+  <router-outlet></router-outlet>
+

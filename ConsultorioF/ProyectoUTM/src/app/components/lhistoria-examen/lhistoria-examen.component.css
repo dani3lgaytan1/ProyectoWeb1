@@ -1,0 +1,10 @@
+h3,h6{
+    justify-content:center;
+    color: rgb(18, 24, 20);
+    display: flex;
+  }
+  label{
+    color: #000;
+    font-size: medium;
+    font-weight: bold;
+}

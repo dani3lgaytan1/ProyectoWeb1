@@ -1,0 +1,3286 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "REST API Consultorio Estudio Dental 1",
+        "description": "<html><body>Esta es la documentación de la API para el sistema del consultorio: Estudio Dental perteneciente a la dentista Vianey Hernandez Santiago.<p>Para poder usar esta API es necesario solicitar el token y con esto poder utilizar los   servicios proporcionados.</p><br><p><b>Autenticación y token de API</b></p><p></p></body></html>",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    }, 
+    "host": "localhost:3000",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "Usuarios",
+            "description": "API para obtener información de los usuarios del sistema perteneciente al consultorio dental"
+        },
+        {
+            "name": "Pacientes",
+            "description": "API para obtener información de los pacientes del consultorio dental"
+        },
+        {
+            "name": "Consultas",
+            "description": "API para obtener información de las consultas del consultorio dental"
+        },
+        {
+            "name": "Tratamientos",
+            "description": "API para obtener información de los tratamientos de los pacientes del consultorio dental"
+        },
+        {
+            "name": "Antecedentes Personales No Patologicos",
+            "description": "API para obtener información de la tabla de APNP de los pacientes del consultorio dental"
+        },
+        {
+            "name": "Denticion",
+            "description": "API para obtener información de la tabla correspondiente a denticion de los pacientes del consultorio dental"
+        },
+        {
+            "name": "Forma Facial",
+            "description": "API para obtener información de la tabla correspondiente a la Forma facial de los pacientes del consultorio dental"
+        },
+        {
+            "name": "Historia y Examen",
+            "description": "API para obtener información de la tabla correspondiente a la Historia medica y examen ortodontico de los pacientes del consultorio dental"
+        },
+        {
+            "name": "Antecedentes Familiares Hereditarios",
+            "description": "API para obtener información de la tabla de AFH de los pacientes del consultorio dental"
+        },
+        {
+            "name": "Patologias de Antecedentes Familiares Hereditarios",
+            "description": "API para obtener información de la tabla correspondiente de las patologias de antecedentes familiares hereditarios de los pacientes del consultorio dental"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "listado de los usuarios que usan el sistema ",
+                "description": "<p>Servicio que devuelve la información detallada de los usuarios que manejan el sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son los usuarios?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "Todo bien",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "nombre": "vianey",
+                                    "correo": "unosdasd",
+                                    "password": "12331"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{id}": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Muestra la información de un usuario, dado su id.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los usuarios que pertenecen al consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son los usuarios del sistema?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "nombre": "vianey",
+                                    "correo": "unosdasd",
+                                    "password": "12331"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del usuario",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/usuarios/{correo}/{password}": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Valida al usuario  dado su correo y contraseña.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los usuarios que pertenecen al consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es el correo y contraseña?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "nombre": "vianey",
+                                    "rol": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "correo",
+                        "in": "path",
+                        "required": true,
+                        "description": "required correo del usuario",
+                        "type": "string",
+                        "default": "1"
+                    },
+                    {
+                        "name": "password",
+                        "in": "path",
+                        "required": true,
+                        "description": "required password del usuario",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/usuarios/": {
+            "post": {
+                "summary": "Agregar un nuevo usuario al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa un usuario al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son los usuarios?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "usuarios",
+                        "in": "body",
+                        "description": "ingrese los datos del nuevo usuario",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoUsuario"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Usuarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/update/{idUsuario}": {
+            "put": {
+                "summary": "Modificar los datos de un usuario",
+                "description": "<p>Servicio que modifica la información de un usuario que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese usuario?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idUsuario",
+                        "in": "path",
+                        "description": "Ingrese el id del usuario",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "Ingrese la informacion del usuario",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/viejoUsuario"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Usuarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/delete/{idUsuario}": {
+            "delete": {
+                "summary": "Eliminar a un usuario",
+                "description": "<p>Servicio que elimina a un usuario del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese usuario?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idUsuario",
+                        "in": "path",
+                        "description": "Ingrese el id del usuario a eliminar",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Usuarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/pacientes": {
+            "get": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Listado de todos los pacientes que acuden al consultorio dental.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los pacientes que pertenecen al consultorio</p><p>&nbsp;</p><p><em><strong>¿Cuáles son los pacientes del consultorio?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_paciente": 1,
+                                    "nombre": "Juan Ramiro Espinoza Gutierrez",
+                                    "lugar_de_nacimiento": "Asuncion Nochixtlan",
+                                    "domicilio": "Privada de Emliano Zapata",
+                                    "estado_civil": "soltero",
+                                    "medico_de_cabecera": "Dr.Juan ignacio",
+                                    "Responsable_o_tutor": "no",
+                                    "fecha": "2022-11-20",
+                                    "edad": 50,
+                                    "sexo": "masculino",
+                                    "ocupacion": "licenciado",
+                                    "escolaridad": "licenciatura",
+                                    "telefono": "951253772",
+                                    "telefonoPX": "0",
+                                    "usuario_id": "1"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Pacientes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/pacientes/{id}": {
+            "get": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Muestra la información de un paciente, dado su id.",
+                "description": "<p>Servicio que devuelve la información detallada de todos pacientes que pertenecen al consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es este paciente en especifico:?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_paciente": 1,
+                                    "nombre": "Juan Ramiro Espinoza Gutierrez",
+                                    "lugar_de_nacimiento": "Asuncion Nochixtlan",
+                                    "domicilio": "Privada de Emliano Zapata",
+                                    "estado_civil": "soltero",
+                                    "medico_de_cabecera": "Dr.Juan ignacio",
+                                    "Responsable_o_tutor": "no",
+                                    "fecha": "2022-11-20",
+                                    "edad": 50,
+                                    "sexo": "masculino",
+                                    "ocupacion": "licenciado",
+                                    "escolaridad": "licenciatura",
+                                    "telefono": "951253772",
+                                    "telefonoPX": "0",
+                                    "usuario_id": "1"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Pacientes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del usuario",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/pacientes/ultimo/id": {
+            "get": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Retorna el ultimo id que se ah ingresado a la tabla pacientes",
+                "description": "<p>Servicio que devuelve el id correspondiente al ultimo paciente ingresado </p><p>&nbsp;</p><p><em><strong>¿Cuáles es este paciente en especifico:?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_paciente": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Pacientes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/pacientes/": {
+            "post": {
+                "summary": "Agregar un nuevo paciente al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa un paciente nuevo al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es el paciente a ingresar?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "paciente",
+                        "in": "body",
+                        "description": "ingrese los datos del nuevo paciente",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoPaciente"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Pacientes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paciente creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Pacientes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/pacientes/update/{idPaciente}": {
+            "put": {
+                "summary": "Modificar los datos de un paciente",
+                "description": "<p>Servicio que modifica la información de un paciente que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es el paciente para actualizar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idPaciente",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente ",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Paciente",
+                        "in": "body",
+                        "description": "Ingrese la informacion del paciente",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ViejoPaciente"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Pacientes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/pacientes/elimina/{idPaciente}": {
+            "delete": {
+                "summary": "Eliminar a un Paciente del sistema ",
+                "description": "<p>Servicio que elimina a un paciente del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es el paciente a eliminar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idPaciente",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente a eliminar",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Pacientes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/consultas/{id}": {
+            "get": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "listado de las consultas totales de un paciente seefun su id ",
+                "description": "<p>Servicio que devuelve la información detallada de las consultas que manejan el sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son las consultas?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "Todo bien",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_consulta": 2,
+                                    "fecha": "2022-11-13",
+                                    "hora": "18:00:00",
+                                    "paciente_id": 2
+
+                                    
+                                },
+                                {
+                                    "id_consulta": 3,
+                                    "fecha": "2022-11-15",
+                                    "hora": "18:00:00",
+                                    "paciente_id": 2
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Consultas"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters":[{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "required el id del paciente",
+                    "type": "number",
+                    "default": "1"
+
+
+                }]
+            }
+        },
+        "/api/consultas/dia/{fechapedida}": {
+            "get": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "Muestra las consultas de un dia en especifico, segun la fecha pedida .",
+                "description": "<p>Servicio que devuelve las consultas de un dia   </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la fecha  en especifico:?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "paciente": "delia",
+                                    "hora": "18:00:00",
+                                    "tratamiento":"limpieza"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/fechaConsultas"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "fechapedida",
+                        "in": "path",
+                        "required": true,
+                        "description": "required la fecha deseada",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/consultas/unaconsulta/{id}": {
+            "get": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "Muestra la informacion de una consulta en especifico segun el id .",
+                "description": "<p>Servicio que devuelve una sola consulta </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la fecha  en especifico:?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                { "id_consulta": 3,
+                                   "fecha": "2022-11-15",
+                                  "hora": "18:00:00",
+                                   "paciente_id": 2
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/fechaConsultas"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "required el id deseado",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        }
+        ,
+        "/api/consultas/agenda/{fecha}/{hora}": {
+            "get": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "Muestra las horas  de un dia especifico, segun la fecha pedida para ver la disponibilidad.",
+                "description": "<p>Servicio que devuelve las consultas de un dia   </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la fecha  en especifico:?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "paciente": "delia",
+                                    "hora": "18:00:00",
+                                    "tratamiento":"limpieza"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/fechaConsultas"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "fecha",
+                        "in": "path",
+                        "required": true,
+                        "description": "required la fecha deseada",
+                        "type": "string",
+                        "default": ""
+                    },
+                    {
+                        "name": "hora",
+                        "in": "path",
+                        "required": true,
+                        "description": "required la hora deseada",
+                        "type": "string",
+                        "default": ""
+                    }
+                ]
+            }
+        },
+        "/api/consultas/": {
+            "post": {
+                "summary": "Agregar una nueva consulta al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa una consulta nueva al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la consulta a ingresar?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "consulta",
+                        "in": "body",
+                        "description": "ingrese los datos de la nueva consulta",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevaConsulta"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Consultas"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consulta creada",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Consultas"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/consultas/update/{idConsulta}": {
+            "put": {
+                "summary": "Modificar los datos de una consulta",
+                "description": "<p>Servicio que modifica la información de una consulta especifica que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es la consulta a actualizar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idConsulta",
+                        "in": "path",
+                        "description": "Ingrese el id de la consulta ",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Consulta",
+                        "in": "body",
+                        "description": "Ingrese la informacion correspondiente a la consulta",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ViejaConsulta"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Consultas"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/consultas/delete/{idConsulta}": {
+            "delete": {
+                "summary": "Eliminar a una consulta del sistema ",
+                "description": "<p>Servicio que elimina una consulta del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es la consulta a eliminar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idConsulta",
+                        "in": "path",
+                        "description": "Ingrese el id de la consulta a eliminar",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Consultas"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/tratamientos/{id}": {
+            "get": {
+                "tags": [
+                    "Tratamientos"
+                ],
+                "summary": "listado de los tratamientos relacionados a los pacientes que estan en el sistema ",
+                "description": "<p>Servicio que devuelve la información detallada de los tratamientos que son realizados a cada pacientee en el sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son los tratamientos?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "Todo bien",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_tratamiento": 1,
+                                    "fecha": "2022-11-10",
+                                    "tratamiento": "extraccion del segundo canino",
+                                    "costo": 500,
+                                    "pago": 200,
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Tratamientos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }, "parameters":[{
+
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "required id del paciente",
+                    "type": "number",
+                    "default": "1"
+
+                }]
+            }
+        },
+        "/api/tratamientos/paciente/{id1}": {
+            "get": {
+                "tags": [
+                    "Tratamientos"
+                ],
+                "summary": "Muestra la información de los tratamientos, dado el id del paciente.",
+                "description": "<p>Servicio que devuelve los tratamientos del paciente  segun su id  </p><p>&nbsp;</p><p><em><strong>¿Cuáles es este paciente en especifico:?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_tratamiento": 1,
+                                    "fecha": "2022-11-10",
+                                    "tratamiento": "extraccion del segundo canino",
+                                    "costo": 500,
+                                    "pago": 200,
+                                    "paciente_id": 1
+                                },
+                                {
+                                    "id_tratamiento": 2,
+                                    "fecha": "2022-11-13",
+                                    "tratamiento": "extraccion del segundo canino",
+                                    "costo": 300,
+                                    "pago": 200,
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/pTratamientos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id1",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del paciente",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        }
+        ,
+        "/api/tratamientos/saldo/{id2}": {
+            "get": {
+                "tags": [
+                    "Tratamientos"
+                ],
+                "summary": "Muestra el saldo restante dado el id del paciente.",
+                "description": "<p>Servicio que devuelve el saldo que resta  del paciente  segun su id  </p><p>&nbsp;</p><p><em><strong>¿Cuáles es este paciente en especifico:?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "saldo": 100
+                                }
+                            ]
+                        }
+                        
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id2",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del paciente",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/tratamientos/": {
+            "post": {
+                "summary": "Agregar una nuevo tratamiento al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa un nuevo tratamiento al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la consulta a ingresar?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tratamiento",
+                        "in": "body",
+                        "description": "ingrese los datos del nuevo tratamiento",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoTratamiento"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Tratamientos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tratamiento creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Tratamientos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/tratamientos/actualiza/{idTratamiento}": {
+            "put": {
+                "summary": "Modificar los datos de una Tratamiento",
+                "description": "<p>Servicio que modifica la información de una tratamiento en especifico que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es el tratamiento a actualizar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idTratamiento",
+                        "in": "path",
+                        "description": "Ingrese el id del tratamiento",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Tratamiento",
+                        "in": "body",
+                        "description": "Ingrese la informacion correspondiente al tratamiento",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ViejoTratamiento"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Tratamientos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/tratamientos/elimina/{idTratamiento}": {
+            "delete": {
+                "summary": "Eliminar a un tratamiento del sistema ",
+                "description": "<p>Servicio que elimina un tratamiento del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es el tratamiento  a eliminar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idTratamiento",
+                        "in": "path",
+                        "description": "Ingrese el id del tratamiento  a eliminar",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Tratamientos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/apnopatologicos": {
+            "get": {
+                "tags": [
+                    "Antecedentes Personales No Patologicos"
+                ],
+                "summary": "listado de las tablas de APNP relacionados a los pacientes que estan en el sistema ",
+                "description": "<p>Servicio que devuelve la información detallada de las tablas DE APNP que son realizados a cada pacientee en el sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son las tablas?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "Todo bien",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_apnp": 1,
+                                    "frecuencia_cepillado": "Diario y tres veces al dia",
+                                    "enhuajes_floruros": 1,
+                                    "hilo_dental": 0,
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/APNP"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/apnopatologicos/{id}": {
+            "get": {
+                "tags": [
+                    "Antecedentes Personales No Patologicos"
+                ],
+                "summary": "Muestra la información de la tabla , dando el id correspondiante al paciente.",
+                "description": "<p>Servicio que devuelve un solo tratamiento segun el id del paciente  </p><p>&nbsp;</p><p><em><strong>¿Cuáles es este paciente en especifico:?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_apnp": 1,
+                                    "frecuencia_cepillado": "Diario y tres veces al dia",
+                                    "enhuajes_floruros": 1,
+                                    "hilo_dental": 0,
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/APNP"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del paciente",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/apnopatologicos/": {
+            "post": {
+                "summary": "Agregar una nueva tabla APNP al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa una nueva tabla APNP al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la tabla  a ingresar?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Antecedentes Personales No Patologicos",
+                        "in": "body",
+                        "description": "ingrese los datos de la tabla",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoAPNP"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Antecedentes Personales No Patologicos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "tabla creada",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 4,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/APNP"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/apnopatologicos/actualiza/{idP}": {
+            "put": {
+                "summary": "Modificar los datos de una una tabla APNP",
+                "description": "<p>Servicio que modifica la información de  una tabla APNP en especifico que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es la tabla a actualizar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idP",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Antecedentes Personales No Patologicos",
+                        "in": "body",
+                        "description": "Ingrese la informacion correspondiente a la tabla APNP",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ViejoAPNP"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Antecedentes Personales No Patologicos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/apnopatologicos/elimina/{idAPNP}": {
+            "delete": {
+                "summary": "Eliminar una tabla de APNP del sistema ",
+                "description": "<p>Servicio que elimina un tratamiento del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es la tabla a eliminar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idAPNP",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente para elminar su tabla APNP",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Antecedentes Personales No Patologicos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/denticion": {
+            "get": {
+                "tags": [
+                    "Denticion"
+                ],
+                "summary": "listado de las tablas de denticion relacionados a los pacientes que estan en el sistema ",
+                "description": "<p>Servicio que devuelve la información detallada de las tablas denticion que son realizados a cada pacientee en el sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son las tablas de denticion ?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "Todo bien",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_denticion": 1,
+                                    "fase_denticion": "Primaria",
+                                    "estado_periodontal": "frenillo anormal",
+                                    "estado_restauracion": "caries",
+                                    "resalte": "5ml",
+                                    "mordida": "mordida abierta posterior",
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/denticion"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/denticion/{idpaciente}": {
+            "get": {
+                "tags": [
+                    "Denticion"
+                ],
+                "summary": "Muestra la información de la tabla denticion , dando el id correspondiante al paciente.",
+                "description": "<p>Servicio que devuelve la tabla denticion correspondiente al id del paciente  </p><p>&nbsp;</p><p><em><strong>¿Cuál es el id del paciente :?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_denticion": 1,
+                                    "fase_denticion": "Primaria",
+                                    "estado_periodontal": "frenillo anormal",
+                                    "estado_restauracion": "caries",
+                                    "resalte": "5ml",
+                                    "mordida": "mordida abierta posterior",
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Denticion"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "idpaciente",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del paciente",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/denticion/": {
+            "post": {
+                "summary": "Agregar una nueva tabla de denticion al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa una nueva tabla de denticion al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la tabla  a ingresar?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Denticion",
+                        "in": "body",
+                        "description": "ingrese los datos de la tabla",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevaDenticion"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Denticion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "tabla creada",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_denticion": 2,
+                                    "fase_denticion": "Primaria",
+                                    "estado_periodontal": "frenillo anormal",
+                                    "estado_restauracion": "caries",
+                                    "resalte": "5ml",
+                                    "mordida": "mordida abierta posterior",
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Denticion"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/denticion/actualiza/{idDenticion}": {
+            "put": {
+                "summary": "Modificar los datos de una una tabla de denticion",
+                "description": "<p>Servicio que modifica la información de  una tabla denticion en especifico que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es la tabla a actualizar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idDenticion",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Denticion",
+                        "in": "body",
+                        "description": "Ingrese la informacion correspondiente a la tabla de denticion",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ViejaDenticion"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Denticion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/denticion/elimina/{idDenticion}": {
+            "delete": {
+                "summary": "Eliminar una tabla de denticion del sistema ",
+                "description": "<p>Servicio que elimina una tabla de denticion  del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es la tabla a eliminar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idDenticion",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente para elminar su tabla denticion",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Denticion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/formafacial": {
+            "get": {
+                "tags": [
+                    "Forma Facial"
+                ],
+                "summary": "listado de las tablas forma facial relacionados a los pacientes que estan en el sistema ",
+                "description": "<p>Servicio que devuelve la información detallada de las tablas de forma facial que son realizados a cada pacientee en el sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son las tablas de forma facial ?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "Todo bien",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_forma_facial": 1,
+                                    "frontal": "asimetria",
+                                    "perfil": "concavo",
+                                    "maxilar": "normal",
+                                    "mandibula": "normal",
+                                    "labios": "Juntos en oclusión céntrica cuando están relajados",
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/FormaFacial"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/formafacial/{idpaciente}": {
+            "get": {
+                "tags": [
+                    "Forma Facial"
+                ],
+                "summary": "Muestra la información de la tabla forma facial , dando el id correspondiante al paciente.",
+                "description": "<p>Servicio que devuelve la tabla de forma facial correspondiente al id del paciente  </p><p>&nbsp;</p><p><em><strong>¿Cuál es el id del paciente :?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_forma_facial": 2,
+                                    "frontal": "asimetria",
+                                    "perfil": "concavo",
+                                    "maxilar": "normal",
+                                    "mandibula": "retrusivo",
+                                    "labios": "Juntos en oclusión céntrica cuando están relajados",
+                                    "paciente_id": 2
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/FormaFacial"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "idpaciente",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del paciente",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/formafacial/": {
+            "post": {
+                "summary": "Agregar una nueva tabla de forma facial al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa una nueva tabla de forma facial al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la tabla  a ingresar?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Forma Facial",
+                        "in": "body",
+                        "description": "ingrese los datos de la tabla",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevaFormaFacial"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Forma Facial"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "tabla creada",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_forma_facial": 2,
+                                    "frontal": "asimetria",
+                                    "perfil": "concavo",
+                                    "maxilar": "normal",
+                                    "mandibula": "retrusivo",
+                                    "labios": "Juntos en oclusión céntrica cuando están relajados",
+                                    "paciente_id": 2
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/FormaFacial"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/formafacial/actualiza/{idForma}": {
+            "put": {
+                "summary": "Modificar los datos de una una tabla de forma facial",
+                "description": "<p>Servicio que modifica la información de  una tabla de forma facial en especifico que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es la tabla a actualizar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idForma",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Forma Facial",
+                        "in": "body",
+                        "description": "Ingrese la informacion correspondiente a la tabla de Forma Facial",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ViejaFormaFacial"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Forma Facial"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/formafacial/elimina/{idForma}": {
+            "delete": {
+                "summary": "Eliminar una tabla de forma facial del sistema ",
+                "description": "<p>Servicio que elimina una tabla de forma facial  del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es la tabla a eliminar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idForma",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente para elminar su tabla de forma facial",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Forma Facial"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/historiaexamen": {
+            "get": {
+                "tags": [
+                    "Historia y Examen"
+                ],
+                "summary": "listado de las tablas de historia y examen  relacionados a los pacientes que estan en el sistema ",
+                "description": "<p>Servicio que devuelve la información detallada de las tablas de historia y examen que son realizados a cada pacientee en el sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son las tablas de historia y examen?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "Todo bien",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_examen_historia": 1,
+                                    "motivo_consulta": "limpieza general",
+                                    "salud_general": "buena",
+                                    "cuadros_importantes": "ninguno",
+                                    "h_digital": "x",
+                                    "h_lengua": "",
+                                    "h_labio": " ",
+                                    "h_bruxismo": "",
+                                    "t_cara_dientes": "ninguno",
+                                    "tratamiento_ortodontico_a": "ninugno",
+                                    "sintomas": "ninguno",
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/HistoriaExamen"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/historiaexamen/{idHistoria}": {
+            "get": {
+                "tags": [
+                    "Historia y Examen"
+                ],
+                "summary": "Muestra la información de la tabla forma facial , dando el id correspondiante al paciente.",
+                "description": "<p>Servicio que devuelve la tabla de forma facial correspondiente al id del paciente  </p><p>&nbsp;</p><p><em><strong>¿Cuál es el id del paciente :?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_examen_historia": 1,
+                                    "motivo_consulta": "limpieza general",
+                                    "salud_general": "buena",
+                                    "cuadros_importantes": "ninguno",
+                                    "h_digital": "x",
+                                    "h_lengua": "",
+                                    "h_labio": " ",
+                                    "h_bruxismo": "",
+                                    "t_cara_dientes": "ninguno",
+                                    "tratamiento_ortodontico_a": "ninugno",
+                                    "sintomas": "ninguno",
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/HistoriaExamen"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "idHistoria",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del paciente",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/historiaexamen/": {
+            "post": {
+                "summary": "Agregar una nueva tabla de historia y examen  de un paciente  al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa una nueva tabla de historia y examen de un paciente al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la tabla  a ingresar?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Historia y Examen",
+                        "in": "body",
+                        "description": "ingrese los datos de la tabla",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevaHistoriaExamen"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Historia y Examen"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "tabla creada",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_examen_historia": 1,
+                                    "motivo_consulta": "limpieza general",
+                                    "salud_general": "buena",
+                                    "cuadros_importantes": "ninguno",
+                                    "h_digital": "x",
+                                    "h_lengua": "",
+                                    "h_labio": " ",
+                                    "h_bruxismo": "",
+                                    "t_cara_dientes": "ninguno",
+                                    "tratamiento_ortodontico_a": "ninugno",
+                                    "sintomas": "ninguno",
+                                    "paciente_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/HistoriaExamen"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/historiaexamen/actualiza/{idHistoriae}": {
+            "put": {
+                "summary": "Modificar los datos de una una tabla de historia y examen mediante el id del paciente ",
+                "description": "<p>Servicio que modifica la información de  una tabla de historia y examen en especifico que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es la tabla a actualizar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idHistoriae",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Historia y Examen",
+                        "in": "body",
+                        "description": "Ingrese la informacion correspondiente a la tabla de historia y examen",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ViejaHistoriaExamen"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Historia y Examen"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    } 
+                }
+            }
+        },
+        "/api/historiaexamen/elimina/{idHistoriae}": {
+            "delete": {
+                "summary": "Eliminar una tabla de historia y examen del sistema ",
+                "description": "<p>Servicio que elimina una tabla de historia y examen  del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es la tabla a eliminar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idHistoriae",
+                        "in": "path",
+                        "description": "Ingrese el id del paciente para elminar su tabla de historia y examen",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Historia y Examen"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/afhpatologias": {
+            "get": {
+                "tags": [
+                    "Patologias de Antecedentes Familiares Hereditarios"
+                ],
+                "summary": "listado de todas las patologias de antecedentes familiares hereditarios relacionados a los pacientes que estan en el sistema ",
+                "description": "<p>Servicio que devuelve la información detallada de las patologias de antecedentes familiares hereditarios  que son realizados a cada pacientee en el sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles son las patologias de AFH?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "Todo bien",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_patologia_afh": 1,
+                                    "nombre_patologia": "diabetes",
+                                    "madre": 0,
+                                    "abuelaMaterna": 0,
+                                    "abueloMaterno": 0,
+                                    "padre": 0,
+                                    "abuelaPaterna": 1,
+                                    "abueloPaterno": 0,
+                                    "hermanos": 0,
+                                    "otros": 0,
+                                    "a_familiares_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/patologiasAFH"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/afhpatologias/{idpatologia}": {
+            "get": {
+                "tags": [
+                    "Patologias de Antecedentes Familiares Hereditarios"
+                ],
+                "summary": "Muestra la información de una patologia de antecedentes familiares hereditarios dando el id correspondiante",
+                "description": "<p>Servicio que devuelve la patologia de antecedentes familiares hereditarios correspondiente al id </p><p>&nbsp;</p><p><em><strong>¿Cuál es el id de la patologia :?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_patologia_afh": 1,
+                                    "nombre_patologia": "diabetes",
+                                    "madre": 0,
+                                    "abuelaMaterna": 0,
+                                    "abueloMaterno": 0,
+                                    "padre": 0,
+                                    "abuelaPaterna": 1,
+                                    "abueloPaterno": 0,
+                                    "hermanos": 0,
+                                    "otros": 0,
+                                    "a_familiares_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/patologiasAFH"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "idpatologia",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id de la patologia a buscar ",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/afhpatologias/": {
+            "post": {
+                "summary": "Agregar una nueva patologia  de un paciente  al sistema del consultorio",
+                "description": "<p>Servicio  que ingresa una nueva patologia en una  tabla de AFH de un paciente al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuáles es la tabla  a ingresar?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Patologia de Antecedentes Familiares Hereditarios",
+                        "in": "body",
+                        "description": "ingrese los datos de la patologia",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevapatologiaAFH"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Patologias de Antecedentes Familiares Hereditarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "tabla creada",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "nombre_patologia": "epilepsias",
+                                    "madre": 0,
+                                    "abuelaMaterna": 0,
+                                    "abueloMaterno": 0,
+                                    "padre": 0,
+                                    "abuelaPaterna": 0,
+                                    "abueloPaterno": 0,
+                                    "hermanos": 0,
+                                    "otros": 0,
+                                    "a_familiares_id": 6
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AFH"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/afhpatologias/actualiza/{idpatologia}": {
+            "put": {
+                "summary": "Modificar los datos de una patologia de AFH mediante su id ",
+                "description": "<p>Servicio que modifica la información de  una patologia de AFH en especifico que pertenece al sistema del consultorio </p><p>&nbsp;</p><p><em><strong>¿Cuál es la patologia a actualizar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idpatologia",
+                        "in": "path",
+                        "description": "Ingrese el id de la patologia de AFH a cambiar",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Patologia de Antecedentes Familiares Hereditarios",
+                        "in": "body",
+                        "description": "Ingrese la informacion correspondiente a la patologia",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ViejapatologiaAFH"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Patologias de Antecedentes Familiares Hereditarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/afhpatologias/elimina/{idPatologia}": {
+            "delete": {
+                "summary": "Eliminar una patologia  del sistema dependiendo del id de la patologia dado",
+                "description": "<p>Servicio que elimina una patologia de una tabla de AFH del sistema  </p><p>&nbsp;</p><p><em><strong>¿Cuál es la patologia a eliminar?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idPatologia",
+                        "in": "path",
+                        "description": "Ingrese el id de la patologia  para elminar  ",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "tags": [
+                    "Patologias de Antecedentes Familiares Hereditarios"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/afhereditarios/{idpaciente}": {
+            "get": {
+                "tags": [
+                    "Antecedentes Familiares Hereditarios"
+                ],
+                "summary": "Muestra la información de la tabla de antecedentes familiares hereditarios , dando el id correspondiante al paciente.",
+                "description": "<p>Servicio que devuelve la tabla de antecedentes familiares hereditarios correspondiente al id del paciente  </p><p>&nbsp;</p><p><em><strong>¿Cuál es el id del paciente :?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_patologia_afh": 1,
+                                    "nombre_patologia": "diabetes",
+                                    "madre": 0,
+                                    "abuelaMaterna": 0,
+                                    "abueloMaterno": 0,
+                                    "padre": 0,
+                                    "abuelaPaterna": 1,
+                                    "abueloPaterno": 0,
+                                    "hermanos": 0,
+                                    "otros": 0,
+                                    "a_familiares_id": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/TpatologiasAFh"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "idpaciente",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del paciente",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/afhereditarios/ultimo/id": {
+            "get": {
+                "tags": [
+                    "Antecedentes Familiares Hereditarios"
+                ],
+                "summary": "Consulta que nos retorna el ultimo id de la tabla a_familiares_hereditarios",
+                "description": "<p>Servicio que devuelve el ultimo id de la tabla a_familiares_hereditarios </p><p>&nbsp;</p><p><em><strong> </strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "ultimo": 32
+                            
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/TpatologiasAFh"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                      
+                    }
+                ]
+            }
+        },
+        "/api/afhereditarios/paciente/{id1}": {
+            "get": {
+                "tags": [
+                    "Antecedentes Familiares Hereditarios"
+                ],
+                "summary": "Consulta que nos retorna el id de la tabla a_familiares_hereditarios dependiendo del id del paciente que se ingresa",
+                "description": "<p>Servicio que devuelve el id de la tabla a_familiares_hereditarios dependiendo del id del paciente que se ingresa</p><p>&nbsp;</p><p><em><strong> </strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id_afh": 32
+                            
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/TpatologiasAFh"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    { 
+                        "name": "id1",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del paciente",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Usuario": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Usuarios"
+            }
+        },
+        "Usuarios": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un usuario"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre de los usuarios"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "contraseña de acceso al sistema"
+                },
+                "correo": {
+                    "type": "string",
+                    "description": "correo para acceder al sistema (unico del usuario)"
+                },
+                "rol": {
+                    "type": "number",
+                    "description": "tipo de cargo dentro del sistema del consultorio"
+                }
+            }
+        },
+        "NuevoUsuario": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre de los usuarios"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "contraseña de acceso al sistema"
+                },
+                "correo": {
+                    "type": "string",
+                    "description": "correo para acceder al sistema (unico del usuario)"
+                },
+                "rol": {
+                    "type": "number",
+                    "description": "tipo de cargo dentro del sistema del consultorio"
+                }
+            }
+        },
+        "viejoUsuario": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre de los usuarios"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "contraseña de acceso al sistema"
+                },
+                "correo": {
+                    "type": "string",
+                    "description": "correo para acceder al sistema (unico del usuario)"
+                },
+                "rol": {
+                    "type": "number",
+                    "description": "tipo de cargo dentro del sistema del consultorio"
+                }
+            }
+        },
+        "Paciente": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Pacientes"
+            }
+        },
+        "Pacientes": {
+            "type": "object",
+            "properties": {
+                "id_paciente": {
+                    "type": "number",
+                    "description": "Identificador único de un paciente"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre de los usuarios"
+                },
+                "lugar_de_nacimiento": {
+                    "type": "string",
+                    "description": "lugar de nacimiento del paciente"
+                },
+                "domicilio": {
+                    "type": "string",
+                    "description": "Domicilio correspondiente al paciente"
+                },
+                "estado_civil": {
+                    "type": "string",
+                    "description": "Estado civil del paciente"
+                },
+                "medico_cabecera": {
+                    "type": "string",
+                    "description": "Medico de cabecera correspondiente al paciente"
+                },
+                "Responsable_o_tutor": {
+                    "type": "string",
+                    "description": "Responsable del paciente"
+                },
+                "fecha": {
+                    "type": "string",
+                    "description": "Fecha de ingreso del paciente"
+                },
+                "edad": {
+                    "type": "number",
+                    "description": "edad correspondiente al paciente"
+                },
+                "sexo": {
+                    "type": "string",
+                    "description": "Sexo correspondiente al paciente"
+                },
+                "ocupacion": {
+                    "type": "string",
+                    "description": "Ocupacion correspondiente al paciente"
+                },
+                "escolaridad": {
+                    "type": "string",
+                    "description": "Escolaridad correspondiente al paciente"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "telefono personal correspondiente al paciente"
+                },
+                "telefonoPX": {
+                    "type": "string",
+                    "description": "telefono de respaldo del paciente"
+                },
+                "usuario_id": {
+                    "type": "number",
+                    "description": "id del usuario que ingreso al paciente"
+                }
+            }
+        },
+        "NuevoPaciente": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre de los usuarios"
+                },
+                "lugar_de_nacimiento": {
+                    "type": "string",
+                    "description": "lugar de nacimiento del paciente"
+                },
+                "domicilio": {
+                    "type": "string",
+                    "description": "Domicilio correspondiente al paciente"
+                },
+                "estado_civil": {
+                    "type": "string",
+                    "description": "Estado civil del paciente"
+                },
+                "medico_de_cabecera": {
+                    "type": "string",
+                    "description": "Medico de cabecera correspondiente al paciente"
+                },
+                "Responsable_o_tutor": {
+                    "type": "string",
+                    "description": "Responsable del paciente"
+                },
+                "fecha": {
+                    "type": "string",
+                    "description": "Fecha de ingreso del paciente"
+                },
+                "edad": {
+                    "type": "number",
+                    "description": "edad correspondiente al paciente"
+                },
+                "sexo": {
+                    "type": "string",
+                    "description": "Sexo correspondiente al paciente"
+                },
+                "ocupacion": {
+                    "type": "string",
+                    "description": "Ocupacion correspondiente al paciente"
+                },
+                "escolaridad": {
+                    "type": "string",
+                    "description": "Escolaridad correspondiente al paciente"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "telefono personal correspondiente al paciente"
+                },
+                "telefonoPX": {
+                    "type": "string",
+                    "description": "telefono de respaldo del paciente"
+                },
+                "usuario_id": {
+                    "type": "number",
+                    "description": "id del usuario que ingreso al paciente"
+                }
+            }
+        },
+        "ViejoPaciente": {
+            "type": "object",
+            "properties": {
+                "id_paciente": {
+                    "type": "number",
+                    "description": "Identificador único de un paciente"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre de los usuarios"
+                },
+                "lugar_de_nacimiento": {
+                    "type": "string",
+                    "description": "lugar de nacimiento del paciente"
+                },
+                "domicilio": {
+                    "type": "string",
+                    "description": "Domicilio correspondiente al paciente"
+                },
+                "estado_civil": {
+                    "type": "string",
+                    "description": "Estado civil del paciente"
+                },
+                "medico_cabecera": {
+                    "type": "string",
+                    "description": "Medico de cabecera correspondiente al paciente"
+                },
+                "Responsable_o_tutor": {
+                    "type": "string",
+                    "description": "Responsable del paciente"
+                },
+                "fecha": {
+                    "type": "string",
+                    "description": "Fecha de ingreso del paciente"
+                },
+                "edad": {
+                    "type": "number",
+                    "description": "edad correspondiente al paciente"
+                },
+                "sexo": {
+                    "type": "string",
+                    "description": "Sexo correspondiente al paciente"
+                },
+                "ocupacion": {
+                    "type": "string",
+                    "description": "Ocupacion correspondiente al paciente"
+                },
+                "escolaridad": {
+                    "type": "string",
+                    "description": "Escolaridad correspondiente al paciente"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "telefono personal correspondiente al paciente"
+                },
+                "telefonoPX": {
+                    "type": "string",
+                    "description": "telefono de respaldo del paciente"
+                },
+                "usuario_id": {
+                    "type": "number",
+                    "description": "id del usuario que ingreso al paciente"
+                }
+            }
+        },
+        "Consulta": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Consultas"
+            }
+        },
+        "Consultas": {
+            "type": "object",
+            "properties": {
+                "id_consulta": {
+                    "type": "number",
+                    "description": "Identificador único de una consulta"
+                },
+                "fecha": {
+                    "type": "string",
+                    "description": "fecha correspondiente a la consulta"
+                },
+                "hora": {
+                    "type": "string",
+                    "description": "Hora de la consulta"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente que tendra la consulta"
+                },
+                "consulta": {
+                    "type": "string",
+                    "description": "que se realizara al paciente en la consulta"
+                }
+            }
+        },
+        "fechaConsultas": {
+            "type": "object",
+            "properties": {
+                
+                "paciente": {
+                    "type": "string",
+                    "description": "paciente de la consulta"
+                },
+                "hora": {
+                    "type": "string",
+                    "description": "Hora de la consulta"
+                },
+                "consulta": {
+                    "type": "string",
+                    "description": "que se realizara al paciente en la consulta"
+                }
+
+                
+            }
+        },
+        "NuevaConsulta": {
+            "type": "object",
+            "properties": {
+                "fecha": {
+                    "type": "string",
+                    "description": "fecha correspondiente a la consulta"
+                },
+                "hora": {
+                    "type": "string",
+                    "description": "Hora de la consulta"
+                },
+                "consulta": {
+                    "type": "string",
+                    "description": "que se realizara al paciente en la consulta"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente que tendra la consulta"
+                }
+            }
+        },
+        "ViejaConsulta": {
+            "type": "object",
+            "properties": {
+                "id_consulta": {
+                    "type": "number",
+                    "description": "Identificador único de una consulta"
+                },
+                "fecha": {
+                    "type": "string",
+                    "description": "fecha correspondiente a la consulta"
+                },
+                "hora": {
+                    "type": "string",
+                    "description": "Hora de la consulta"
+                },
+                "consulta": {
+                    "type": "string",
+                    "description": "que se realizara al paciente en la consulta"
+                }
+            }
+        },
+        "Tratamiento": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Tratamientos"
+            }
+        },
+        "Tratamientos": {
+            "type": "object",
+            "properties": {
+                "id_tratamiento": {
+                    "type": "number",
+                    "description": "Identificador único de un tratamiento"
+                },
+                "fecha": {
+                    "type": "string",
+                    "description": "fecha correspondiente al tratamiento"
+                },
+                "tratamiento": {
+                    "type": "string",
+                    "description": "Descripcion del tratamiento realizado"
+                },
+                "costo": {
+                    "type": "number",
+                    "description": "Valor monetario total del tratamiento"
+                },
+                "pago": {
+                    "type": "number",
+                    "description": "Valor monetario que el paciente abono del costo del tratamiento"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente que fue tratado"
+                }
+            }
+        },
+        "pTratamientos": {
+            "type": "object",
+            "properties": {
+                "fecha": {
+                    "type": "string",
+                    "description": "fecha correspondiente al tratamiento"
+                },
+                "tratamiento": {
+                    "type": "string",
+                    "description": "Descripcion del tratamiento realizado"
+                },
+                "costo": {
+                    "type": "number",
+                    "description": "Valor monetario total del tratamiento"
+                },
+                "pago": {
+                    "type": "number",
+                    "description": "Valor monetario que el paciente abono del costo del tratamiento"
+                }
+            }
+        },
+        "NuevoTratamiento": {
+            "type": "object",
+            "properties": {
+                "fecha": {
+                    "type": "string",
+                    "description": "fecha correspondiente al tratamiento"
+                },
+                "tratamiento": {
+                    "type": "string",
+                    "description": "Descripcion del tratamiento realizado"
+                },
+                "costo": {
+                    "type": "number",
+                    "description": "Valor monetario total del tratamiento"
+                },
+                "pago": {
+                    "type": "number",
+                    "description": "Valor monetario que el paciente abono del costo del tratamiento"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente que fue tratado"
+                }
+            }
+        },
+        "ViejoTratamiento": {
+            "type": "object",
+            "properties": {
+                "id_tratamiento": {
+                    "type": "number",
+                    "description": "Identificador único de un tratamiento"
+                },
+                "fecha": {
+                    "type": "string",
+                    "description": "fecha correspondiente al tratamiento"
+                },
+                "tratamiento": {
+                    "type": "string",
+                    "description": "Descripcion del tratamiento realizado"
+                },
+                "costo": {
+                    "type": "number",
+                    "description": "Valor monetario total del tratamiento"
+                },
+                "pago": {
+                    "type": "number",
+                    "description": "Valor monetario que el paciente abono del costo del tratamiento"
+                }
+            }
+        },
+        "Antecedentes personales no patologicos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/APNP"
+            }
+        },
+        "APNP": {
+            "type": "object",
+            "properties": {
+                "id_apnp": {
+                    "type": "number",
+                    "description": "Identificador único de una tabla de APNP"
+                },
+                "frecuencia_cepillado": {
+                    "type": "string",
+                    "description": "frecuencia de cepillado correspondiente al paciente"
+                },
+                "enguajes_floruros": {
+                    "type": "number",
+                    "description": "Uso de enguajes y floruros por parte del paciente"
+                },
+                "hilo_dental": {
+                    "type": "number",
+                    "description": "Uso del hilo dental "
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente al que esta relacionada la tabla "
+                }
+            }
+        },
+        "NuevoAPNP": {
+            "type": "object",
+            "properties": {
+                "frecuencia_cepillado": {
+                    "type": "string",
+                    "description": "frecuencia de cepillado correspondiente al paciente"
+                },
+                "enguajes_floruros": {
+                    "type": "number",
+                    "description": "Uso de enguajes y floruros por parte del paciente"
+                },
+                "hilo_dental": {
+                    "type": "number",
+                    "description": "Uso del hilo dental "
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente al que esta relacionada la tabla "
+                }
+            }
+        },
+        "ViejoAPNP": {
+            "type": "object",
+            "properties": {
+                "frecuencia_cepillado": {
+                    "type": "string",
+                    "description": "frecuencia de cepillado correspondiente al paciente"
+                },
+                "enguajes_floruros": {
+                    "type": "number",
+                    "description": "Uso de enguajes y floruros por parte del paciente"
+                },
+                "hilo_dental": {
+                    "type": "number",
+                    "description": "Uso del hilo dental "
+                }
+            }
+        },
+        "denticion": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Denticion"
+            }
+        },
+        "Denticion": {
+            "type": "object",
+            "properties": {
+                "id_denticion": {
+                    "type": "number",
+                    "description": "Identificador único de la tabla de denticion"
+                },
+                "fase_denticion": {
+                    "type": "string",
+                    "description": "fase de la denticion del paciente"
+                },
+                "estado_periodontal": {
+                    "type": "string",
+                    "description": "estado periodontal del paciente"
+                },
+                "estado_restauracion": {
+                    "type": "string",
+                    "description": "estado de restauracion del paciente"
+                },
+                "resalte": {
+                    "type": "string",
+                    "description": "El overjet conrrespondiente al paciente"
+                },
+                "mordida": {
+                    "type": "string",
+                    "description": "estado de la mordida  del paciente"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente al que esta relacionada la tabla "
+                }
+            }
+        },
+        "NuevaDenticion": {
+            "type": "object",
+            "properties": {
+                "fase_denticion": {
+                    "type": "string",
+                    "description": "fase de la denticion del paciente"
+                },
+                "estado_periodontal": {
+                    "type": "string",
+                    "description": "estado periodontal del paciente"
+                },
+                "estado_restauracion": {
+                    "type": "string",
+                    "description": "estado de restauracion del paciente"
+                },
+                "resalte": {
+                    "type": "string",
+                    "description": "El overjet conrrespondiente al paciente"
+                },
+                "mordida": {
+                    "type": "string",
+                    "description": "estado de la mordida  del paciente"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente al que esta relacionada la tabla "
+                }
+            }
+        },
+        "ViejaDenticion": {
+            "type": "object",
+            "properties": {
+                "fase_denticion": {
+                    "type": "string",
+                    "description": "fase de la denticion del paciente"
+                },
+                "estado_periodontal": {
+                    "type": "string",
+                    "description": "estado periodontal del paciente"
+                },
+                "estado_restauracion": {
+                    "type": "string",
+                    "description": "estado de restauracion del paciente"
+                },
+                "resalte": {
+                    "type": "string",
+                    "description": "El overjet conrrespondiente al paciente"
+                },
+                "mordida": {
+                    "type": "string",
+                    "description": "estado de la mordida  del paciente"
+                }
+            }
+        },
+        "formafacial": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/FormaFacial"
+            }
+        },
+        "FormaFacial": {
+            "type": "object",
+            "properties": {
+                "id_forma_facial": {
+                    "type": "number",
+                    "description": "Identificador único de la tabla de forma facial"
+                },
+                "frontal": {
+                    "type": "string",
+                    "description": "forma frontal del paciente "
+                },
+                "perfil": {
+                    "type": "string",
+                    "description": "perfil del paciente"
+                },
+                "maxilar": {
+                    "type": "string",
+                    "description": "forma maxilar del paciente"
+                },
+                "mandibula": {
+                    "type": "string",
+                    "description": "tipo de mandibula del  paciente"
+                },
+                "labios": {
+                    "type": "string",
+                    "description": "forma de los labios del paciente"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente al que esta relacionada la tabla "
+                }
+            }
+        },
+        "NuevaFormaFacial": {
+            "type": "object",
+            "properties": {
+                "frontal": {
+                    "type": "string",
+                    "description": "forma frontal del paciente "
+                },
+                "perfil": {
+                    "type": "string",
+                    "description": "perfil del paciente"
+                },
+                "maxilar": {
+                    "type": "string",
+                    "description": "forma maxilar del paciente"
+                },
+                "mandibula": {
+                    "type": "string",
+                    "description": "tipo de mandibula del  paciente"
+                },
+                "labios": {
+                    "type": "string",
+                    "description": "forma de los labios del paciente"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente al que esta relacionada la tabla "
+                }
+            }
+        },
+        "ViejaFormaFacial": {
+            "type": "object",
+            "properties": {
+                "frontal": {
+                    "type": "string",
+                    "description": "forma frontal del paciente "
+                },
+                "perfil": {
+                    "type": "string",
+                    "description": "perfil del paciente"
+                },
+                "maxilar": {
+                    "type": "string",
+                    "description": "forma maxilar del paciente"
+                },
+                "mandibula": {
+                    "type": "string",
+                    "description": "tipo de mandibula del  paciente"
+                },
+                "labios": {
+                    "type": "string",
+                    "description": "forma de los labios del paciente"
+                }
+            }
+        },
+        "historiayexamen": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/HistoriaExamen"
+            }
+        },
+        "HistoriaExamen": {
+            "type": "object",
+            "properties": {
+                "id_examen_historia": {
+                    "type": "number",
+                    "description": "Identificador único de la tabla de historia y examen "
+                },
+                "motivo_consulta": {
+                    "type": "string",
+                    "description": "motivo de consulta del paciente "
+                },
+                "salud_general": {
+                    "type": "string",
+                    "description": "salud general del paciente"
+                },
+                "cuadros_importantes": {
+                    "type": "string",
+                    "description": "cuadros medicos importantes que padece el paciente"
+                },
+                "h_digital": {
+                    "type": "string",
+                    "description": "si tiene habitos de tipo digital"
+                },
+                "h_lengua": {
+                    "type": "string",
+                    "description": "si tiene habitos en lengua"
+                },
+                "h_labio": {
+                    "type": "string",
+                    "description": "si tiene habitos en labio"
+                },
+                "h_bruxismo": {
+                    "type": "string",
+                    "description": "si tiene bruxismo"
+                },
+                "t_cara_dientes": {
+                    "type": "string",
+                    "description": "si tuvo o tiene traumatismos en la cara o dientes"
+                },
+                "tratamiento_ortodontico_a": {
+                    "type": "string",
+                    "description": "el tipo de tratamiento ortodontico anterior que tuvo antes de ingrsar al consultorio"
+                },
+                "sintomas": {
+                    "type": "string",
+                    "description": "sintomas que tuvo el paciente"
+                },
+                "dolor": {
+                    "type": "string",
+                    "description": "Dolor que experimento el paciente"
+                },
+                "historia": {
+                    "type": "string",
+                    "description": "eventos pasados que llevaron a los sintomas o dolores "
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente al que esta relacionada la tabla "
+                }
+            }
+        },
+        "NuevaHistoriaExamen": {
+            "type": "object",
+            "properties": {
+                "motivo_consulta": {
+                    "type": "string",
+                    "description": "motivo de consulta del paciente "
+                },
+                "salud_general": {
+                    "type": "string",
+                    "description": "salud general del paciente"
+                },
+                "cuadros_importantes": {
+                    "type": "string",
+                    "description": "cuadros medicos importantes que padece el paciente"
+                },
+                "h_digital": {
+                    "type": "string",
+                    "description": "si tiene habitos de tipo digital"
+                },
+                "h_lengua": {
+                    "type": "string",
+                    "description": "si tiene habitos en lengua"
+                },
+                "h_labio": {
+                    "type": "string",
+                    "description": "si tiene habitos en labio"
+                },
+                "h_bruxismo": {
+                    "type": "string",
+                    "description": "si tiene bruxismo"
+                },
+                "t_cara_dientes": {
+                    "type": "string",
+                    "description": "si tuvo o tiene traumatismos en la cara o dientes"
+                },
+                "tratamiento_ortodontico_a": {
+                    "type": "string",
+                    "description": "el tipo de tratamiento ortodontico anterior que tuvo antes de ingrsar al consultorio"
+                },
+                "sintomas": {
+                    "type": "string",
+                    "description": "sintomas que tuvo el paciente"
+                },
+                "dolor": {
+                    "type": "string",
+                    "description": "Dolor que experimento el paciente"
+                },
+                "historia": {
+                    "type": "string",
+                    "description": "eventos pasados que llevaron a los sintomas o dolores "
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "Id del paciente al que esta relacionada la tabla "
+                }
+            }
+        },
+        "ViejaHistoriaExamen": {
+            "type": "object",
+            "properties": {
+                "motivo_consulta": {
+                    "type": "string",
+                    "description": "motivo de consulta del paciente "
+                },
+                "salud_general": {
+                    "type": "string",
+                    "description": "salud general del paciente"
+                },
+                "cuadros_importantes": {
+                    "type": "string",
+                    "description": "cuadros medicos importantes que padece el paciente"
+                },
+                "h_digital": {
+                    "type": "string",
+                    "description": "si tiene habitos de tipo digital"
+                },
+                "h_lengua": {
+                    "type": "string",
+                    "description": "si tiene habitos en lengua"
+                },
+                "h_labio": {
+                    "type": "string",
+                    "description": "si tiene habitos en labio"
+                },
+                "h_bruxismo": {
+                    "type": "string",
+                    "description": "si tiene bruxismo"
+                },
+                "t_cara_dientes": {
+                    "type": "string",
+                    "description": "si tuvo o tiene traumatismos en la cara o dientes"
+                },
+                "tratamiento_ortodontico_a": {
+                    "type": "string",
+                    "description": "el tipo de tratamiento ortodontico anterior que tuvo antes de ingrsar al consultorio"
+                },
+                "sintomas": {
+                    "type": "string",
+                    "description": "sintomas que tuvo el paciente"
+                },
+                "dolor": {
+                    "type": "string",
+                    "description": "Dolor que experimento el paciente"
+                },
+                "historia": {
+                    "type": "string",
+                    "description": "eventos pasados que llevaron a los sintomas o dolores "
+                }
+            }
+        },
+        "Antecedentes Familiares hereditarios": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/AFH"
+            }
+        },
+        "AFH": {
+            "type": "object",
+            "properties": {
+                "id_afh": {
+                    "type": "number",
+                    "description": "Identificador único de una tabla de APNP"
+                },
+                "paciente_id": {
+                    "type": "number",
+                    "description": "identificador correspondiente al paciente"
+                }
+            }
+        },
+        "NuevaAFH": {
+            "type": "object",
+            "properties": {
+                "paciente_id": {
+                    "type": "number",
+                    "description": "identificador correspondiente al paciente"
+                }
+            }
+        },
+        "ViejaAFH": {
+            "type": "object",
+            "properties": {
+                "paciente_id": {
+                    "type": "number",
+                    "description": "identificador correspondiente al paciente"
+                }
+            }
+        },
+        "Patologias de Antecedentes Familiares hereditarios": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/patologiasAFH"
+            }
+        },
+        "patologiasAFH": {
+            "type": "object",
+            "properties": {
+                "id_patologia_afh": {
+                    "type": "number",
+                    "description": "Identificador único de una patologia en la tabla  de AFH"
+                },
+                "nombre_patologia": {
+                    "type": "string",
+                    "description": "Identificador único de una patologia en la tabla  de AFH"
+                },
+                "madre": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abuelaMaterna": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abueloMaterno": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "padre": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abuelaPaterna": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abueloPaterno": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "hermanos": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "otros": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "a_familiares_id": {
+                    "type": "number",
+                    "description": "identificador correspondiente al paciente"
+                }
+            }
+        },
+        "TpatologiasAFh": {
+            "type": "object",
+            "properties": {
+                "nombre_patologia": {
+                    "type": "string",
+                    "description": "Identificador único de una patologia en la tabla  de AFH"
+                },
+                "madre": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abuelaMaterna": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abueloMaterno": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "padre": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abuelaPaterna": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abueloPaterno": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "hermanos": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "otros": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                }
+            }
+        },
+        "NuevapatologiaAFH": {
+            "type": "object",
+            "properties": {
+                "nombre_patologia": {
+                    "type": "string",
+                    "description": "Identificador único de una patologia en la tabla  de AFH"
+                },
+                "madre": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abuelaMaterna": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abueloMaterno": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "padre": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abuelaPaterna": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abueloPaterno": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "hermanos": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "otros": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "a_familiares_id": {
+                    "type": "number",
+                    "description": "identificador correspondiente al paciente"
+                }
+            }
+        },
+        "ViejapatologiaAFH": {
+            "type": "object",
+            "properties": {
+                "nombre_patologia": {
+                    "type": "string",
+                    "description": "Identificador único de una patologia en la tabla  de AFH"
+                },
+                "madre": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abuelaMaterna": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abueloMaterno": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "padre": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abuelaPaterna": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "abueloPaterno": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "hermanos": {
+                    "type": "number",
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                },
+                "otros": {
+                    "type": "number", 
+                    "description": "valor booleano para saber si el familiar padecio alguna de estas patologias"
+                }
+            }
+        }
+    }
+}

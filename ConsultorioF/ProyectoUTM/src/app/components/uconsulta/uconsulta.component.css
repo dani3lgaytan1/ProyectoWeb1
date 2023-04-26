@@ -1,0 +1,41 @@
+h2{
+    justify-content:center;
+    color: rgb(18, 24, 20);
+    display: flex;
+  }
+  /* label color */
+  .input-field label {
+    color: #000;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #000;
+  }
+  button{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  label{
+    color: #000;
+    font-size: medium;
+    font-weight: bold;
+}
+
+#paginaConsultas{
+  width: 500px;
+  color: #fff; /* Color de texto blanco */
+  padding: 10px; /* Añade un espacio alrededor de la paginación */
+}
+
+.my-paginationConsultas ::ng-deep .ngx-pagination  {
+  background: rgb(152, 105, 247);
+  width: 500px;
+  display: inline-block; /* Muestra los controles de paginación en línea */
+
+}
+.my-paginationConsultas ::ng-deep .ngx-pagination .current{
+  background-color: rgb(109, 110, 110);
+  color: black;
+}

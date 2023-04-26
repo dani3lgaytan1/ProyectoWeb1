@@ -1,0 +1,173 @@
+
+  <!--
+      
+  <div> <img [src]="dameNombre(345)" (error)="onImgError($event)" id="perfil" > </div>
+  
+  -->
+  
+
+
+  <div  class="center">
+    <button (click)="exportUsuarios()"><img src="{{liga}}/excel.png"
+    style="width:32px;height:32px;" ></button>
+  </div>
+
+  <div class="consainer1 s12">
+  <h3>Lista de Usuarios:</h3>
+    <table class="striped" id="TablaUsuarios">
+        <thead>
+          <tr >
+             <th> </th>
+              <th>Nombre del usuario</th>
+              <th>correo</th>
+          </tr>
+  
+        </thead>
+       
+        <tbody>
+          <tr *ngFor="let  usuario1 of listarUsuarios  | paginate:{
+            itemsPerPage :pageSize,
+            currentPage : p
+          } ; let i = index">
+            <td> <img [src]="dameNombre(usuario1.id_usuario)" (error)="onImgError($event)" id="perfil2" > </td>
+            <td>{{usuario1.nombre}}</td>
+            <td>{{usuario1.correo}} </td>
+            <td>
+              <button  (click)="visualizarUsuario(usuario1.id_usuario)"   class="btn col l12 s8 m12 btnLogin deep-purple lighten-2  ">
+                <i class="material-icons">remove_red_eye</i>
+                 </button>
+             </td>
+           <td>
+            <button  (click)=" visualizarformularioUsuarios(usuario1.id_usuario)"   class="btn col l12 s8 m12 btnLogin deep-purple lighten-2  ">
+              <i class="material-icons">edit</i>
+               </button>
+           </td>
+           <td>
+            <button  (click)="eliminarUsuarios(usuario1.id_usuario)"  class="btn col l12 s8 m12 btnLogin red darken-2 ">
+              <i class="material-icons">delete</i>
+            </button>
+           </td>
+          </tr>
+        </tbody>
+      </table>
+      
+    <div id="paginaUsuarios" class="row center-align ">
+        <pagination-controls class="my-paginationUsuarios" (pageChange)="p = ($event)"
+        previousLabel="Anterior" nextLabel="Siguiente">
+        </pagination-controls>
+    </div>
+  
+     
+
+  </div>
+
+ 
+
+  <!-- 
+     <div class="container">
+    <button class="btn col l12 s8 m12 btnLogin black" ><a routerLink="/ingresarUsuario" ><i class="tiny material-icons left">face</i>Ingresar Usuario</a></button>
+   </div>
+
+  -->
+ 
+<!--  MOdal para poder modificar la informacion de un Usuario  -->
+
+<div id="modalmodificarUsuario" class="modal">
+  <div class="modal-content">
+    <h3>Usuarios :</h3>
+  </div>
+  <div class="section container">
+    <div class="row">
+      <form class="col s12" method="post">
+        <div class="row card-panel   grey lighten-2 ">
+
+          <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">person</i>
+            <input [(ngModel)]="usuarioactual.nombre" type="text" name="nombre" id="nombre" placeholder="nombre">  <!--aqui se extrae la informacion necesitafa para mandarlo, ademas de que se usa el modelo de usuario definido en models   -->
+                <label  class="active" for="nombre">Nombre</label>
+            </div>
+        <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">email</i>
+            <input [(ngModel)]="usuarioactual.correo"  type="email" name="email" id="email"  placeholder="correo"
+                >  <!--aqui se extrae la informacion necesitafa para mandarlo, ademas de que se usa el modelo de usuario definido en models   -->
+                <label  class="active" for="correo">Email</label>
+         </div>
+        <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">vpn_key</i>
+            <input [(ngModel)]="usuarioactual.password"  type="password"    name="password" id="password" 
+                placeholder="contraseña" >
+                <label class="active"  for="password">contraseña</label>
+        </div>
+        <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">vpn_key</i>
+            <input [(ngModel)]="usuarioactual.rol"  type="number"    name="rol" id="rol1" 
+                placeholder="rol" >
+            <label class="active" for="rol1">rol </label>
+        </div>
+
+        <div  class="input-field col s12 customInput"> <input type="file"  id="perfili"  (change)="cargandoImagen($event.target,'usuarios',usuarioactual.id_usuario)" multiple>
+          <label class="active"  for="perfili">Foto de perfil</label>
+        </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button  (click)="modificarUsuario()" type="submit" class="modal-close  waves-effect waves-purple btn-flat">
+           Guardar Nueva Informacion de Usuario <i class="tiny material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+ 
+<!--  MOdal para poder modificar la informacion de un Usuario  -->
+
+<div id="modalverUsuario" class="modal">
+  <div class="modal-content">
+    <h3>Usuarios :</h3>
+  </div>
+  <div class="containerPerfil"> <img [src]="dameNombre(usuarioactual.id_usuario)" (error)="onImgError($event)" id="perfil" ></div>
+  <div class="section container">
+    <div class="row">      
+      <form class="col s12" method="post">
+        <div class="row card-panel  grey lighten-2">
+
+          <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">person</i>
+            <input [(ngModel)]="usuarioactual.nombre" type="text" name="nombre" id="nombrev" placeholder="nombre">  <!--aqui se extrae la informacion necesitafa para mandarlo, ademas de que se usa el modelo de usuario definido en models   -->
+                <label class="active" for="nombrev">Nombre</label>
+            </div>
+        <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">email</i>
+            <input [(ngModel)]="usuarioactual.correo"  type="email" name="email" id="emailv"  placeholder="correo"
+                >  <!--aqui se extrae la informacion necesitafa para mandarlo, ademas de que se usa el modelo de usuario definido en models   -->
+                <label class="active" for="emailv">Email</label>
+         </div>
+        <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">vpn_key</i>
+            <input [(ngModel)]="usuarioactual.password"  type="text"    name="password" id="passwordv" 
+                placeholder="contraseña" >
+                <label class="active" for="passwordv">contraseña</label>
+        </div>
+
+        <div class="input-field col s12 customInput">
+          <i class="material-icons prefix">assignment_ind</i>
+          <input [(ngModel)]="usuarioactual.id_usuario"  type="text"    name="id1" id="idm" 
+              placeholder="ID" >
+              <label class="active"  for="idm">id</label>
+      </div>
+        <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">chrome_reader_modez</i>
+            <input [(ngModel)]="usuarioactual.rol"  type="number"    name="rol" id="rol1v" 
+                placeholder="rol" >
+            <label class="active" for="rol1v">rol </label>
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

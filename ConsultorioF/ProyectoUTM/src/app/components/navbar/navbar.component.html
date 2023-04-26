@@ -1,0 +1,925 @@
+<div>
+  <nav>
+    <div *ngIf="tipoUsuario==1" class="nav-wrapper deep-purple lighten-2">
+      <a routerLink="/home/inicio" class="brand-logo right"><i class="medium material-icons left">home</i> Estudio
+        Dental 1 </a>
+      <ul class="left hide-on-med-and-down">
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent' data-target='dropdown1'><i
+              class="tiny material-icons left"></i>Pacientes</a>
+
+          <!-- Dropdown Structure -->
+          <ul id='dropdown1' class='dropdown-content  text-blacks'>
+            <li> <a class="black-text" [routerLink]="['/home/listarpaciente']">Lista de Pacientes</a></li>
+            <li> <a class="black-text" (click)="visualizarFormularioNuevoPaciente()"><i
+                  class="tiny material-icons left">add</i>Ingresar
+                Paciente</a></li>
+          </ul>
+        </li>
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent' data-target='dropdown2'><i
+              class="tiny material-icons left"></i>Consultas</a>
+          <ul id='dropdown2' class='dropdown-content'>
+            <li><a class="black-text" [routerLink]="['/home/consultas']"><i
+                  class="tiny material-icons left">library_add</i>Consultas del
+                Dia </a></li>
+            <li> <a class="black-text" (click)="visualizarFormularioConsulta()"><i
+                  class="tiny material-icons left">library_add</i>Ingresar
+                consulta </a></li>
+          </ul>
+        </li>
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent ' data-target='dropdown3'><i
+              class="tiny material-icons left"></i>Usuarios</a>
+          <ul id='dropdown3' class='dropdown-content'>
+            <li><a class="black-text" [routerLink]="['/home/Usuarios']"><i
+                  class="tiny material-icons left">library_add</i>Usuarios del
+                sistema</a></li>
+            <li><a class="black-text" (click)=" visualizarFormularioUsuario()"><i
+                  class="tiny material-icons left">face</i>Ingresar
+                Usuario</a>
+          </ul>
+        </li>
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent' data-target='dropdown4'><i
+              class="tiny material-icons left"></i>Tratamientos</a>
+          <ul id='dropdown4' class='dropdown-content'>
+            <li> <a class="black-text" (click)="visualizarFormularioTratamiento()">Crear nuevo tratamiento </a></li>
+          </ul>
+        </li>
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent' data-target='dropdown5'><i
+              class="tiny material-icons left"></i>Importar</a>
+          <!-- Dropdown Structure -->
+          <ul id='dropdown5' class='dropdown-content  text-blacks'>
+            <li> <a   (click)="visualizarMigrarPaciente()"  class="black-text">Pacientes</a></li>
+            <li> <a  (click)="visualizarMigrarUsuario()" class="black-text">Usuarios</a></li>
+          </ul>
+        </li>
+        <li><a (click)="salir()"><i class="tiny material-icons left">exit</i>Salir</a></li>
+      </ul>
+    </div>
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+    <!-- Navegador diseñado para el tipo de Usuario 2        -->
+
+    <div *ngIf="tipoUsuario==2" class="nav-wrapper deep-purple lighten-2">
+      <a routerLink="/home/inicio" class="brand-logo right"><i class="medium material-icons left">home</i> Estudio
+        Dental 1 </a>
+      <ul class="left hide-on-med-and-down">
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent' data-target='dropdown1'><i
+              class="tiny material-icons left"></i>Pacientes</a>
+
+          <!-- Dropdown Structure -->
+          <ul id='dropdown1' class='dropdown-content'>
+            <li><a class="black-text" [routerLink]="['/home/listarpaciente']">Lista de Pacientes</a></li>
+            <li><a class="black-text" (click)="visualizarFormularioNuevoPaciente()"><i
+                  class="tiny material-icons left">add</i>Ingresar
+                Paciente</a> </li>
+          </ul>
+        </li>
+
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent ' data-target='dropdown2'><i
+              class="tiny material-icons left"></i>Consultas</a>
+          <ul id='dropdown2' class='dropdown-content'>
+            <li><a class="black-text" [routerLink]="['/home/consultas']"><i
+                  class="tiny material-icons left">library_add</i>Consultas del
+                Dia </a></li>
+            <li> <a class="black-text" (click)="visualizarFormularioConsulta()"><i
+                  class="tiny material-icons left">library_add</i>Ingresar
+                consulta </a></li>
+          </ul>
+        </li>
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent ' data-target='dropdown4'><i
+              class="tiny material-icons left"></i>Tratamientos</a>
+          <ul id='dropdown4' class='dropdown-content'>
+            <li> <a class="black-text" (click)="visualizarFormularioTratamiento()">Crear nuevo tratamiento </a></li>
+          </ul>
+        </li>
+        <li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn transparent' data-target='dropdown5'><i
+              class="tiny material-icons left"></i>Importar</a>
+
+          <!-- Dropdown Structure -->
+          <ul id='dropdown5' class='dropdown-content  text-blacks'>
+            <li> <a (click)="visualizarMigrarPaciente()"  class="black-text">Pacientes</a></li>
+           
+          </ul>
+
+        </li>
+        <li><a (click)="salir()"><i class="tiny material-icons left">exit</i>Salir</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<!---Modal para ingresar una consulta:  -->
+
+<div id="modalClientes" class="modal">
+  <div class="modal-content">
+    <h2>Ingresar Nueva Consulta:</h2>
+  </div>
+  <div class="section container">
+    <div class="row">
+      <form class="col s12" method="post">
+        <div class="row card-panel grey lighten-2">
+
+
+          <div class="input-field col s6">
+            <input [(ngModel)]="consulta1.fecha" name="fecha" id="fechaI" type="text">
+            <label for="fechaI">Fecha:</label>
+          </div>
+          <div class="input-field col s6">
+            <input [(ngModel)]="consulta1.hora" name="hora" id="horaI" type="text">
+            <label for="horaI">Hora:</label>
+          </div>
+          <div class="input-field col s10">
+            <input [(ngModel)]="consulta1.consulta" name="consulta" id="Iconsulta" type="text">
+            <label for="Iconsulta">Tratamiento a realizar:</label>
+          </div>
+
+          <div class="input-field col s9">
+            <select [(ngModel)]="consulta1.paciente_id" class="browser-default" name="paciente_id" id="Cpacienteid">
+              <option selected disabled="disabled">Seleccione</option>
+              <option [value]="paciente1.id_paciente" *ngFor="let paciente1 of listarpaciente"> {{paciente1.nombre}}
+              </option>
+            </select>
+            <label for="Cpacienteid">Paciente Id</label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button (click)=" agregarconsulta()" type="submit" class="modal-close waves-effect waves-purple btn-flat">
+            Guardar Consulta<i class="tiny material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+
+<!---Modal para ingresar un Tratamiento :  -->
+<div id="modalTratamiento" class="modal">
+  <div class="modal-content">
+    <h3>Tratamiento:</h3>
+  </div>
+  <div class="section container">
+    <div class="row">
+      <form class="col s12" method="post">
+        <div class="row card-panel grey lighten-2 ">
+          <div class="input-field col s6">
+            <input [(ngModel)]="tratamiento1.fecha" name="fecha" id="fechaT" type="text">
+            <label for="fechaT">Fecha:</label>
+          </div>
+          <div class="input-field col s6">
+            <input [(ngModel)]="tratamiento1.tratamiento" name="tratamiento" id="Itratamiento" type="text">
+            <label for="Itratamiento">tratamiento:</label>
+          </div>
+          <div class="input-field col s10">
+            <input [(ngModel)]="tratamiento1.costo" name="costo" id="Icosto" type="number">
+            <label for="Icosto">costo:</label>
+          </div>
+          <div class="input-field col s2">
+            <input [(ngModel)]="tratamiento1.pago" name="pago" id="Ipago" type="number">
+            <label for="Ipago">pago:</label>
+          </div>
+          <div class="input-field col s9">
+            <select [(ngModel)]="tratamiento1.paciente_id" class="browser-default" name="paciente_id" id="Tpacienteid">
+              <option selected disabled="disabled">Seleccione</option>
+              <option [value]="paciente1.id_paciente" *ngFor="let paciente1 of listarpaciente"> {{paciente1.nombre}}
+              </option>
+            </select>
+            <label for="Tpacienteid">Paciente Id</label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button (click)=" agregart()" type="submit" class="modal-close waves-effect waves-purple btn-flat">
+            Guardar Tratamiento <i class="tiny material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<!-- Modal para ingresar a usuarios:   -->
+
+<div id="modalUsuarios" class="modal">
+  <div class="modal-content">
+    <h3>Usuarios :</h3>
+  </div>
+  <div class="section container">
+    <div class="row">
+      <form class="col s12" method="post">
+        <div class="row card-panel grey lighten-2">
+
+          <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">person</i>
+            <input [(ngModel)]="usuario1.nombre" type="text" name="nombre" id="Unombre" placeholder="nombre">
+            <!--aqui se extrae la informacion necesitafa para mandarlo, ademas de que se usa el modelo de usuario definido en models   -->
+            <label for="Unombre">Nombre</label>
+          </div>
+          <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">email</i>
+            <input [(ngModel)]="usuario1.correo" type="email" name="email" id="Uemail" placeholder="correo">
+            <!--aqui se extrae la informacion necesitafa para mandarlo, ademas de que se usa el modelo de usuario definido en models   -->
+            <label for="Ucorreo">Email</label>
+          </div>
+          <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">vpn_key</i>
+            <input [(ngModel)]="usuario1.password" type="password" name="password" id="Upassword"
+              placeholder="contraseña">
+            <label for="UPassword">contraseña</label>
+          </div>
+          <div class="input-field col s12 customInput">
+            <i class="material-icons prefix">vpn_key</i>
+            <input [(ngModel)]="usuario1.rol" type="number" name="rol" id="Urol1" placeholder="rol">
+            <label for="Urol1">rol </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="agregarUsuario()" type="submit" class="modal-close  waves-effect waves-purple btn-flat">
+            Guardar <i class="tiny material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--   ----------------------------------------------------------------------------------------------------------    -->
+
+
+<!-- Modal Structure para ingresar a un nuevo Paciente  -->
+<div id="modalPacientes" class="modal">
+  <div class="modal-content">
+
+    <h4>Ingresa la informacion del paciente: </h4>
+    <div class="input-field col s6">
+      <input [(ngModel)]="paciente1.nombre" name="nombre" id="Pnombre" type="text" class="validate">
+      <label for="Pnombre">Nombre</label>
+    </div>
+    <div class="input-field col s6">
+      <input [(ngModel)]="paciente1.lugar_de_nacimiento" name="lugar_de_nacimiento" id="Plugar_nac" type="text"
+        class="validate">
+      <label for="Plugar_nac">Lugar de nacimiento </label>
+    </div>
+    <div class="input-field col s8">
+      <input [(ngModel)]="paciente1.domicilio" name="domicilio" id="Pdomicilio" type="text" class="validate">
+      <label for="Pdomicilio">Domicilio</label>
+    </div>
+    <div class="input-field col s4">
+      <input [(ngModel)]="paciente1.estado_civil" name="estado_civil" id="Pestado_civil" type="text" class="validate">
+      <label for="Pestado_civil">Estado Civil</label>
+    </div>
+    <div class="input-field col s6">
+      <input [(ngModel)]="paciente1.medico_de_cabecera" id="Pmedico_de_cabecera" name="medico" type="text"
+        class="validate">
+      <label for="Pmedico">Medico de Cabecera</label>
+    </div>
+    <div class="input-field col s6">
+      <input [(ngModel)]="paciente1.Responsable_o_tutor" name="Responsable_o_tutor" id="Presponsable" type="text"
+        class="validate">
+      <label for="Presponsable">Responsable o Tutor</label>
+    </div>
+    <div class="input-field col s4">
+      <input [(ngModel)]="paciente1.fecha" name="fecha" id="Pfecha" type="text" class="validate">
+      <label for="Pfecha">Fecha</label>
+    </div>
+    <div class="input-field col s4">
+      <input [(ngModel)]="paciente1.edad" name="edad" id="Pedad" type="number" class="validate">
+      <label for="Pedad">Edad</label>
+    </div>
+    <div class="input-field col s4">
+      <input [(ngModel)]="paciente1.sexo" name="sexo" id="Psexo" type="text" class="validate">
+      <label for="Psexo">Sexo</label>
+    </div>
+    <div class="input-field col s6">
+      <input [(ngModel)]="paciente1.ocupacion" name="ocupacion" id="Pocupacion" type="text" class="validate">
+      <label for="Pocupacion">Ocupacion</label>
+    </div>
+    <div class="input-field col s6">
+      <input [(ngModel)]="paciente1.escolaridad" name="escolaridad" id="Pescolaridad" type="text" class="validate">
+      <label for="Pescolaridad">Escolaridad</label>
+    </div>
+    <div class="input-field col s5">
+      <input [(ngModel)]="paciente1.telefono" name="telefono" id="Ptelefono" type="text" class="validate">
+      <label for="Ptelefono">Telefono</label>
+    </div>
+    <div class="input-field col s5">
+      <input [(ngModel)]="paciente1.telefonoPX" name="telefonoPX" id="Ptel2" type="text" class="validate">
+      <label for="Ptel2">TelefonoPx</label>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a (click)="ingresarPaciente()" class="modal-close waves-effect waves-purple btn-flat">Ingresar Informacion
+      General <i class="tiny material-icons right">send</i></a>
+  </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+<div id="modalPnp" class="modal">
+  <div class="modal-content">
+    <h4>ANTECEDENTES PERSONALES NO PATOLÓGICOS: </h4>
+    <div class="input-field col s6">
+      <input [(ngModel)]="personalesnp.frecuencia_cepillado" name="frecuencia_cepillado" id="Ifcepillado" type="text">
+      <label for="Ifcepillado">Frecuencia de Cepillado:</label>
+    </div>
+    <p>
+      <label>
+        <input [(ngModel)]="personalesnp.enguajes_floruros" name="enguajes_floruros" type="checkbox" class="filled-in"
+          checked="checked" />
+        <span>Enjuagues con Floruros</span>
+      </label>
+    </p>
+    <p>
+      <label>
+        <input [(ngModel)]="personalesnp.hilo_dental" name="hilo_dental" type="checkbox" class="filled-in"
+          checked="checked" />
+        <span>Hilo Dental</span>
+      </label>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a (click)="ingresarPnp()" class="modal-close waves-effect waves-purple btn-flat">Ingresar <i
+        class="tiny material-icons right">send</i></a>
+  </div>
+</div>
+
+<!--   -------------------------------------------------------------------------------------  -->
+<!-- Modal para ingresar la historia y examen  -->
+
+
+<div id="modalHyE" class="modal">
+  <div class="modal-content">
+    <h4>Ingresar Historia y exanen : </h4>
+    <div class="input-field col s6">
+      <input [(ngModel)]="historiaexamen.motivo_consulta" name="motivo_consulta" id="Imconsulta" type="text">
+      <label for="Imconsulta">Motivo de Consulta:</label>
+    </div>
+    <div class="input-field col s12">
+      <h6>Historia medica y examen de las vias aéreas</h6>
+    </div>
+    <div class="input-field col s6">
+      <input [(ngModel)]="historiaexamen.salud_general" name="salud_general" id="Isalud" type="text">
+      <label for="Isalud">Salud General:</label>
+    </div>
+    <div class="input-field col s8">
+      <input [(ngModel)]="historiaexamen.cuadros_importantes" name="cuadros_importantes" id="Icuadros" type="text">
+      <label for="Iuadros">Cuadros Importantes(medicacion antibiotica):</label>
+    </div>
+    <div class="input-field col s12">
+      <h6>Historia Dental</h6>
+    </div>
+
+    <div class="input-field col s6">
+      <input [(ngModel)]="historiaexamen.t_cara_dientes" id="Itraumatismo" name="t_cara_dientes" type="text">
+      <label for="Itraumatismo">Traumatismo de cara y dientes:</label>
+    </div>
+    <div class="input-field col s6">
+      <input [(ngModel)]="historiaexamen.tratamiento_ortodontico_a" name="tratamiento_ortodontico_a" id="ItratamientoA"
+        type="text" class="validate">
+      <label for="ItratamientoA">Tratamiento Ortodontico Anterior:</label>
+    </div>
+    <div class="input-field col s12">
+      <h6>Examen de articulacion temporomandibular:</h6>
+    </div>
+    <div class="input-field col s8">
+      <input [(ngModel)]="historiaexamen.sintomas" id="Isintomas" name="sintomas" type="text">
+      <label for="Isintomas">Sintomas:</label>
+    </div>
+    <div class="input-field col s8">
+      <input [(ngModel)]="historiaexamen.dolor" name="dolor" id="Idolor" type="text" class="validate">
+      <label for="Idolor">Dolor:</label>
+    </div>
+    <div class="input-field col s8">
+      <input [(ngModel)]="historiaexamen.historia" name="historia" id="Ihistoria" type="text" class="validate">
+      <label for="Ihistoria">Historia:</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a (click)="ingresarHistoriaE()" class="modal-close waves-effect waves-purple btn-flat">Guardar Historia <i
+        class="tiny material-icons right">send</i></a>
+  </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------  -->
+<!-- Modal para ingresar el formualario de Denticion-->
+<div id="modalDenticion" class="modal">
+  <div class="modal-content">
+    <h4>Ingresar Denticion: </h4>
+    <div class="input-field col l6 m3  ">
+      <select [(ngModel)]="denticion1.fase_denticion" name="fase_denticion" id="Ifdenticion">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="primaria">Primaria</option>
+        <option value="mixta">Mixta</option>
+        <option value="permanente">Permanente</option>
+      </select>
+      <label for="Ifdenticion">Fase de Detencion:</label>
+    </div>
+    <div class="input-field col l6 m3  ">
+      <select [(ngModel)]="denticion1.estado_periodontal" name="estado_periodontal" id="IEperiodontal">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="retraccion gingival">Retraccion Gingival</option>
+        <option value="frenillo anormal">Frenillo anormal</option>
+      </select>
+      <label for="IEperiodontal">Estado Periodontal:</label>
+    </div>
+    <div class="input-field col l8 m3  ">
+      <select [(ngModel)]="denticion1.estado_restauracion" name="estado_restauracion" id="Ierestauracion">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="caries">Caries</option>
+        <option value="endodoncias">Endodoncias</option>
+      </select>
+      <label for="Ierestauracion">Estado de Restauracion:</label>
+    </div>
+    <div class="input-field col s12">
+      <p>Anteposterior</p>
+    </div>
+
+    <div class="input-field col l6 m3  ">
+      <select [(ngModel)]="denticion1.clasificacion_angle" name="clasificacion_angle" id="Icangle">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="clase 1">Clase 1</option>
+        <option value="clase 2">Clase 2</option>
+        <option value="clase 3">Clase 3</option>
+      </select>
+      <label for="Icangle">Clasificacion de Angle:</label>
+    </div>
+    <div class="input-field col s6">
+      <input [(ngModel)]="denticion1.resalte" id="Iresalte" name="resalte" type="text">
+      <label for="Iresalte">Resalte:</label>
+    </div>
+    <div class="input-field col s12">
+      <p>Vertical</p>
+    </div>
+    <div class="input-field col l8 m3  ">
+      <select [(ngModel)]="denticion1.mordida" name="mordida" id="Imordida">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="mordida abierta anterior">Mordida abierta anterior</option>
+        <option value="mordida abierta posterior">Mordida abierta posterior</option>
+      </select>
+      <label for="Imordida">Sobre mordida:</label>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a (click)="ingresarDenticion()" class="modal-close waves-effect waves-purple btn-flat">Ingresar Denticion <i
+        class="tiny material-icons right">send</i> </a>
+  </div>
+</div>
+
+<!--  ------------------------------------------------------------------------------------------------------ -->
+<!-- Modal para ingresar la informacion de la tabla Forma facial  -->
+
+<div id="modalFormaFacial" class="modal">
+  <div class="modal-content">
+    <h4>Ingresar Forma Facial del Paciente: </h4>
+    <div class="input-field col l6 m3  ">
+      <select [(ngModel)]="forma1.frontal" name="frontal" id="Ifrontal">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="bilateral simetria">Bilateral Simetria</option>
+        <option value="bilateral asimetria">Bilateral Asimetria</option>
+      </select>
+      <label for="Ifrontal">Frontal:</label>
+    </div>
+    <div class="input-field col l6 m3  ">
+      <select [(ngModel)]="forma1.perfil" name="Iperfil" id="perfil">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="recto">Recto</option>
+        <option value="convexo">Convexo</option>
+        <option value="concavo">Concavo</option>
+      </select>
+      <label for="Iperfil">Perfil:</label>
+    </div>
+    <div class="input-field col s12">
+      <h6>Posiciones ante posteriores de las mandibulas</h6>
+    </div>
+
+    <div class="input-field col l6 m3  ">
+      <select [(ngModel)]="forma1.maxilar" name="maxilar" id="Imaxilar">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="normal">Normal</option>
+        <option value="protuyente">Protuyente</option>
+        <option value="retrusivo">Retrusivo</option>
+      </select>
+      <label for="Imaxilar">Maxilar:</label>
+    </div>
+    <div class="input-field col l6 m3  ">
+      <select [(ngModel)]="forma1.mandibula" name="mandibula" id="Imandibula">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="normal">Normal</option>
+        <option value="protuyente">Protuyente</option>
+        <option value="retrusivo">Retrusivo</option>
+      </select>
+      <label for="Imandibula">Mandibula:</label>
+    </div>
+
+    <div class="input-field col l8 m3  ">
+      <select [(ngModel)]="forma1.labios" name="labios" id="Ilabios">
+        <option selected disabled="disabled">Seleccione</option>
+        <option value="Juntos en oclusion relajados">Juntos en oclusion centrica cuando estan relajados
+        </option>
+        <option value="Separados en oclusion relajados">Separados en oclusion centrica cuando estan
+          relajados</option>
+        <option value="sonrisa gingival">Sonrisa Gingival</option>
+      </select>
+      <label for="Ilabios">Labios:</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a (click)="ingresarFormaFacial()" class="modal-close waves-effect waves-purple btn-flat">Ingresar Forma Facial <i
+        class="tiny material-icons right">send</i> </a>
+  </div>
+</div>
+
+
+<!-- 
+
+  modal para importar excel: 
+-->
+
+<!-- MIGRAR MODAL Pacientes  -->
+<div class="modal input-field" id="migrarPaciente">
+
+  <div class="center"> <h4>Ingresa el archivo excel de pacientes: </h4> </div>
+  <div class="row file">
+    <form action="#">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>File</span>
+          <input (change)="cargarExcel($event)" type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col s6 center">
+      <a (click)="migrarPacienteE()" class="modal-action waves-effect
+  waves-green btn-flat">Migrar</a>
+    </div>
+    <div class="col s6 center">
+      <a class="modal-action modal-close
+  waves-effect waves-green btn-flat">Cancelar</a>
+    </div>
+  </div>
+</div>
+
+<!-- MIGRAR MODAL -->
+<div class="modal input-field" id="migrarUsuario">
+  <div class="row file">
+    <form action="#">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>File</span>
+          <input (change)="cargarExcel($event)" type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col s6 center">
+      <a (click)="migrarUsuarios()" class="modal-action waves-effect
+  waves-green btn-flat">Migrar</a>
+    </div>
+    <div class="col s6 center">
+      <a class="modal-action modal-close
+  waves-effect waves-green btn-flat">Cancelar</a>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<!-- Modal para ingresar la pinche tabla alv :   -->
+
+<div id="modalpatologiasHIn" class="modal">
+  <div class="modal-content">
+    <h3>Patologias familiares Hereditarias:</h3>
+  </div>
+  <div class="section container">
+    <div class="row">
+      <form class="col s12" method="post">
+        <div class="row card-panel grey lighten-2 ">
+          <table class="striped col s12">
+            <thead>
+              <tr>
+                <th>Patologias</th>
+                <th>Madre</th>
+                <th>Abuela</th>
+                <th>Abuelo</th>
+                <th>Padre</th>
+                <th>Abuela</th>
+                <th>Abuelo</th>
+                <th>Otros</th>
+                <th>Hermanos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th><label><span>Diabetes</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh1.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh1.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh1.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh1.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh1.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh1.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh1.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh1.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh1,6)">Ingresar Patologia </button> </td>
+              </tr>
+              <tr>
+                <th><label><span>Hipertencion Arterial</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh2.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh2.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh2.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh2.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh2.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh2.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh2.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh2.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh2,7)">Ingresar Patologia </button> </td>
+              </tr>
+              <tr>
+                <th><label><span>Epilepsia</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh4.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh4.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh4.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh4.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh4.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh4.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh4.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh4.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh4,10)">Ingresar Patologia </button> </td>
+              </tr>
+
+              <tr>
+                <th><label><span>Malformaciones</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh5.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh5.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh5.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh5.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh5.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh5.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh5.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh5.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh5,13)">Ingresar Patologia </button> </td>
+              </tr>
+
+              <tr>
+                <th><label><span>SIDA</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh6.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh6.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh6.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh6.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh6.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh6.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh6.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh6.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh6,11)">Ingresar Patologia </button> </td>
+              </tr>
+
+              <tr>
+                <th><label><span>Cardiopatias</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh3.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh3.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh3.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh3.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh3.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh3.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh3.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh3.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh3,8)">Ingresar Patologia </button> </td>
+              </tr>
+
+              <tr>
+                <th><label><span>Enfermedades Renales </span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh7.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh7.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh7.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh7.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh7.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh7.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh7.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh7.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh7,12)">Ingresar Patologia </button> </td>
+              </tr>
+
+              <tr>
+                <th><label><span>Hepatitis</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh8.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh8.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh8.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh8.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh8.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh8.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh8.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh8.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh8,14)">Ingresar Patologia </button> </td>
+              </tr>
+
+              <tr>
+                <th><label><span>Artritis</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh9.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh9.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh9.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh9.padre" name="padre" type="checkbox" /> <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh9.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh9.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh9.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh9.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh9,15)">Ingresar Patologia </button> </td>
+              </tr>
+              <tr>
+                <th><label><span>Tabaquismo</span></label>
+                </th>
+                <td><label><input [(ngModel)]="patologiafh10.madre" name="madre" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh10.abuelaMaterna" name="abuelaMaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh10.abueloMaterno" name="abueloMaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh10.padre" name="padre" type="checkbox" />
+                    <span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh10.abuelaPaterna" name="abuelaPaterna"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh10.abueloPaterno" name="abueloPaterno"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh10.otros" name="otros" type="checkbox" /><span></span></label>
+                </td>
+                <td><label><input [(ngModel)]="patologiafh10.hermanos" name="hermanos"
+                      type="checkbox" /><span></span></label>
+                </td>
+                <td> <button (click)="ingresarPatologiafh(patologiafh10,18)">Ingresar Patologia </button> </td>
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button (click)="visualizarFormularioHyE()" type="submit"
+            class="modal-close  waves-effect waves-purple btn-flat">
+            Historia y Examen
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

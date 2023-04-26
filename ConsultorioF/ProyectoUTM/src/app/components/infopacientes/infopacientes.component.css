@@ -1,0 +1,30 @@
+  
+  h2{
+    justify-content:center;
+    color: rgb(18, 24, 20);
+    display: flex;
+  }
+  /* label color */
+  .input-field label {
+    color: #000;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #000;
+  }
+  button{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  label{
+    color: #000;
+    font-size: medium;
+    font-weight: bold;
+}
+  h6{
+    justify-content:center;
+    color: rgb(18, 24, 20);
+    display: flex;
+  }

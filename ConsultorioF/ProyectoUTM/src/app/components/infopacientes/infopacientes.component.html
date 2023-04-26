@@ -1,0 +1,114 @@
+<h2>Informacion general del paciente:</h2>
+<div class="section container">
+    <div class="row">
+      <form class="col s12" method="post">
+        <div class="row card-panel grey lighten-2">
+          <div class="input-field col s6">
+            <input [(ngModel)]="paciente1.nombre" name="nombre" id="nombre" type="text" class="validate">
+            <label class="active"  for="nombre">Nombre</label>
+          </div>
+          <div class="input-field col s6">
+              <input [(ngModel)]="paciente1.lugar_de_nacimiento" name="lugar_de_nacimiento" id="lugar_nac" type="text" class="validate">
+              <label  class="active" for="lugar_nac">Lugar de nacimiento </label>
+          </div>
+          <div class="input-field col s8">
+            <input  [(ngModel)]="paciente1.domicilio" name="domicilio"  id="domicilio" type="text" class="validate">
+            <label  class="active" for="domicilio">Domicilio</label>
+          </div>
+          <div class="input-field col s4">
+            <input  [(ngModel)]="paciente1.estado_civil" name="estado_civil" id="estado_civil" type="text" class="validate">
+            <label class="active" for="estado_civil">Estado Civil</label>
+          </div>
+          <div class="input-field col s6">
+            <input  [(ngModel)]="paciente1.medico_de_cabecera" id="medico_de_cabecera" name="medico" type="text" class="validate">
+            <label  class="active" for="medico">Medico de Cabecera</label>
+          </div>
+          <div class="input-field col s6">
+            <input  [(ngModel)]="paciente1.Responsable_o_tutor"  name="Responsable_o_tutor" id="responsable" type="text" class="validate">
+            <label  class="active" for="responsable">Responsable o Tutor</label>
+          </div>
+          <div class="input-field col s4">
+            <input  [(ngModel)]="paciente1.fecha"  name="fecha" id="fecha" type="text" class="validate">
+            <label class="active" for="fecha">Fecha de ingreso al consultorio</label>
+          </div>
+          <div class="input-field col s4">
+            <input  [(ngModel)]="paciente1.edad" name="edad" id="edad" type="number" class="validate">
+            <label class="active" for="responsable">Edad</label>
+          </div>
+          <div class="input-field col s4">
+            <input   [(ngModel)]="paciente1.sexo" name="sexo" id="sexo" type="text" class="validate">
+            <label class="active" for="sexo">Sexo</label>
+          </div>
+          <div class="input-field col s6">
+            <input  [(ngModel)]="paciente1.ocupacion" name="ocupacion" id="ocupacion" type="text" class="validate">
+            <label class="active" for="ocupacion">Ocupacion</label>
+          </div>
+          <div class="input-field col s6">
+            <input  [(ngModel)]="paciente1.escolaridad" name="escolaridad" id="escolaridad" type="text" class="validate">
+            <label class="active" for="escolaridad">Escolaridad</label>
+          </div>
+          <div class="input-field col s5">
+            <input  [(ngModel)]="paciente1.telefono" name="telefono" id="telefono" type="text" class="validate">
+            <label class="active" for="telefono">Telefono</label>
+          </div>
+          <div class="input-field col s5">
+            <input  [(ngModel)]="paciente1.telefonoPX" name="telefonoPX" id="tel2" type="text" class="validate">
+            <label class="active" for="tel2">TelefonoPx</label>
+          </div>
+         
+        </div>
+      </form>
+    </div>
+    
+  
+  
+  </div> 
+
+  <div class="container">
+    <app-lpersonalesnp></app-lpersonalesnp>
+  </div>
+
+  <div class="container "> 
+    <table class=" responsive-table highlight grey lighten-2">
+      <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Madre</th>
+            <th>Abuela</th>
+            <th>Abuelo</th>
+            <th>Padre</th>
+            <th>Abuela</th>
+            <th>Abuelo</th>
+            <th>Otros</th>
+            <th>Hermanos</th>
+        </tr>
+      </thead>
+  
+      <tbody >
+        <tr *ngFor="let patologia1 of listadePatologias ">
+         <td >{{patologia1.nombre_f}}</td>
+         <td >{{patologia1.madre}}</td>
+         <td >{{patologia1.abuelaMaterna}}</td>
+         <td >{{patologia1.abueloMaterno}}</td>
+         <td >{{patologia1.padre}}</td>
+         <td >{{patologia1.abuelaPaterna}}</td>
+         <td >{{patologia1.abueloPaterno}}</td>
+         <td >{{patologia1.hermanos}}</td>
+         <td >{{patologia1.otros}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="container" > 
+   <app-lhistoria-examen></app-lhistoria-examen> 
+  </div>
+  <div class="container" > 
+    <app-ldenticion></app-ldenticion>
+   </div>
+   <div class="container" > 
+    <app-lformaf></app-lformaf>
+   </div>
+
+    
